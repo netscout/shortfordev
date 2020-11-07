@@ -1,0 +1,26 @@
+<html>
+
+<head>
+  <title>Express</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+  <h1>Express</h1>
+  <p>Welcome to Express</p>
+  <div id="ogp">
+
+  </div>
+  <script>
+    fetch("/ogp")
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        document.getElementById("ogp").innerHTML = `<a href="${res.ogUrl}"><img src="${res.ogImage.url}"/><div><h5>${res.ogTitle}</h5><p>${res.ogDescription}</p></div></a>`;
+      });
+    
+  </script>
+</body>
+
+</html>
