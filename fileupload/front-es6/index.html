@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-group">
+            <label for="image-container">사진 목록</label>
+            <div>
+                <div id="image-container" class="image-container">
+                </div>
+
+                <div>
+                    <label class="btn btn-primary">
+                        사진을 고르세요
+                        <input
+                            type="file"
+                            id="fileInput"
+                            accept="image/*"
+                            multiple>
+                    </label>
+                </div>
+                <div>
+                    <button class="btn btn-secondary" id="btnSubmit">전송</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="image-container">전송 결과</label>
+                <div id="result-image-container" class="image-container">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
