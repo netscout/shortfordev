@@ -1,0 +1,17 @@
+version: '3'
+
+volumes:
+    mysql_dev: {}
+
+services:
+    mysql_db:
+        image: mysql
+        ports:
+            - "3306:3306"
+        volumes:
+            - mysql_dev:/var/lib/mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=fnxmvotmdnjem
+            - MYSQL_DATABASE=ProxyTest
+            - MYSQL_USER=user
+            - MYSQL_PASSWORD=dbwjvotmdnjem
