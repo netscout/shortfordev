@@ -1,0 +1,36 @@
+<html>
+
+<head>
+  <title>Server Sent Events</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+  <h1>Server Sent Events</h1>
+  <div>
+    <button type="button" id="btnStop">중지</button>
+  </div>
+  <div id="logs">
+
+  </div>
+
+  <script>
+    const eventSource = new EventSource("/events");
+
+    //SSE 메세지 수신시
+    eventSource.onmessage = function(e) {
+      let p = document.createElement("p");
+      p.innerText = e.data;
+
+      document.getElementById("logs").appendChild(p);
+    }
+
+    document.getElementById("btnStop")
+      .addEventListener("click", function() {
+        //SSE 메세지 수신 중지
+        eventSource.close();
+      })
+  </script>
+</body>
+
+</html>

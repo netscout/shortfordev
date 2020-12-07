@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <title>Express</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link
+      href="https://cdn.quilljs.com/1.3.6/quill.snow.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <h1>간단한 동시 문서 편집기</h1>
+    <div id="editor"></div>
+
+    <script src="https://cdn.socket.io/socket.io-3.0.3.min.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+      const quill = new Quill("#editor", {
+        theme: "snow",
+      });
+
+      //https://quilljs.com/docs/api/#editor-change
+      quill.on("editor-change", function (eventName, ...args) {
+        if (eventName === "text-change") {
+          // args[0] will be delta
+          console.log("text-change: ", args[0]);
+        } else if (eventName === "selection-change") {
+          // args[0] will be old range
+          console.log("selection-change: ", args[0]);
+        }
+        
+        if (args[2] && args[2] === "user") {
+          socket.emit("update", {
+            event: eventName,
+            delta: args[0],
+          });
+        }
+      });
+
+      const socket = io("http://localhost:3000");
+
+      socket.on("connect", function () {
+        console.log("connected");
+      });
+
+      socket.on("update", function (data) {
+        const eventName = data.event;
+        const delta = data.delta;
+        if (eventName === "text-change") {
+          quill.updateContents(delta);
+        } 
+        else if (eventName === "selection-change") {
+          quill.setSelection(delta.index, delta.length);
+        }
+      });
+    </script>
+  </body>
+</html>
