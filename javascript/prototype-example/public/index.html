@@ -1,0 +1,49 @@
+<html>
+
+<head>
+  <title>Express</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+  <h1>Express</h1>
+  <p id="welcome">Welcome to Express</p>
+
+  <button type="button" id="btnToggle">토글</button>
+
+  <script>
+    const welcome = document.getElementById("welcome");
+    const btnToggle = document.getElementById("btnToggle");
+
+    HTMLElement.prototype.show = function () {
+      this.style.visibility = "visible";
+    };
+    HTMLElement.prototype.hide = function () {
+      this.style.visibility = "hidden";
+    };
+    HTMLElement.prototype.toggle = function () {
+      if(this.style.visibility === "hidden") {
+        this.show();
+      }
+      else {
+        this.hide();
+      }
+    }
+
+    btnToggle.addEventListener("click", function() {
+      welcome.toggle();
+      //toggleElement(welcome);
+    });
+
+    // function toggleElement(el) {
+    //   if(el.style.visibility === "hidden") {
+    //     el.style.visibility = "visible";
+    //   }
+    //   else {
+    //     el.style.visibility = "hidden";
+    //   }
+    // }
+  </script>
+</body>
+
+</html>
